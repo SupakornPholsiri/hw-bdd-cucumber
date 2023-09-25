@@ -10,8 +10,19 @@
   </head>
   <body>
     <%# These classes come from the Bootstrap CSS framework. %>
-    <nav class="navbar navbar-expand-lg bg-primary text-white mb-3">
+    <nav class="navbar navbar-expand-lg bg-primary text-white mb-3 d-flex justify-content-between">
+    
       <h1 class="title">Rotten Potatoes!</h1>
+      <div class="d-flex align-items-center">
+      
+      <% if set_current_user%>
+        <span class="px-2"><%="#{@current_user.name}"%></span>
+        <%=button_to 'Log out', logout_path, class: 'btn btn-secondary'%>
+      <% else %>
+        <%=button_to 'Log in with Google', login_path, class: 'btn btn-secondary'%>
+      <% end %>
+      
+      </div>
     </nav>
     <div class="container">
       <%# Render "flash" messages in our application. This loads _flash.erb %>

@@ -1,3 +1,5 @@
+Tmdb::Api.key(ENV['TMDB_API_KEY'])
+
 class MoviesController < ApplicationController
   before_action :force_index_redirect, only: [:index]
 
@@ -46,19 +48,14 @@ class MoviesController < ApplicationController
   end
 
   def search_tmdb
-    tmdb_movies = {0 => {:title => "Inception", :rating => "R", :description => 'n/a', 
-                  :created_at => '25-Nov-1992', :updated_at => '25-Nov-1992', :release_date => '25-Nov-1992'}}
-    results = Hash.new()
-    tmdb_movies.each_pair do |key, data|
-      if data[:title].downcase == params[:movie][:title].downcase
-        results[key] = data
-      end
-    end
-    if results.length == 0
+    params_title = params[:movie][:title]
+    results = Tmdb::Movie.find(params_title)
+
+    if results.empty?
       flash[:notice] = "'#{params[:movie][:title]}' was not found in TMDb."
       redirect_to movies_path
     else
-      @movies = results
+      @result = results[0]
     end
   end
 

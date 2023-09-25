@@ -1,17 +1,15 @@
 <h2>Add new movie</h2>
 
-<% @movies.values.each do |movie|%>
-  <%= form_tag movies_path, class: 'form' do %>
-    <%= label :movie, :title, 'Title', class: 'col-form-label' %>
-    <%= text_field :movie, :title, class: 'form-control', value: "#{movie[:title]}" %>
-    <%= label :movie, :rating, 'Rating', class: 'col-form-label'%>
-    <%= select :movie, :rating, ['G','PG','PG-13','R'], {class: 'form-control col-1', selected: "#{movie[:rating]}"} %>
-    <%= label :movie, :release_date, 'Released On', class: 'col-form-label' %>
-    <%= date_select :movie, :release_date, {default: Date.strptime('25-Nov-1992', '%d-%b-%Y')}, class: 'form-control col-2 d-inline' %>
-    <br><br>
-    <%= submit_tag 'Save Changes', class: 'btn btn-primary' %>
-    <%= link_to 'Cancel', movies_path, class: 'btn btn-secondary' %>
-  <% end %>
-  <% break %>
+
+<%= form_tag movies_path, class: 'form' do %>
+  <%= label :movie, :title, 'Title', class: 'col-form-label' %>
+  <%= text_field :movie, :title, class: 'form-control', value: "#{@result.title}" %>
+  <%= label :movie, :rating, 'Rating', class: 'col-form-label'%>
+  <%= select :movie, :rating, ['G','PG','PG-13','R'], {class: 'form-control col-1', selected: (@result.adult ? 'R' : 'G') } %>
+  <%= label :movie, :release_date, 'Released On', class: 'col-form-label' %>
+  <%= date_select :movie, :release_date, {default: Date.parse(@result.release_date)}, class: 'form-control col-2 d-inline' %>
+  <br><br>
+  <%= submit_tag 'Save Changes', class: 'btn btn-primary' %>
+  <%= link_to 'Cancel', movies_path, class: 'btn btn-secondary' %>
 <% end %>
 

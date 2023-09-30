@@ -1,6 +1,4 @@
 class ReviewsController < ApplicationController
-end
-class ReviewsController < ApplicationController
     def create
         # movie_id because of nested route
         @movie = Movie.find(params[:movie_id])

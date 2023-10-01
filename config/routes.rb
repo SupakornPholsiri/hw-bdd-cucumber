@@ -11,4 +11,5 @@ Rottenpotatoes::Application.routes.draw do
   get  'auth/failure' => 'sessions#failure'
   post 'logout' => 'sessions#destroy', :as => 'logout'
   post 'auth/google_oauth2', :as => 'login'
+  get  '/login' => 'moviegoers#login', :as => 'login_page'
 end

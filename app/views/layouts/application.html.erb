@@ -15,7 +15,7 @@
       <h1 class="title">Rotten Potatoes!</h1>
       <div class="d-flex align-items-center">
       
-      <% if set_current_user%>
+      <% if @current_user%>
         <span class="px-2"><%="#{@current_user.name}"%></span>
         <%=button_to 'Log out', logout_path, class: 'btn btn-secondary'%>
       <% else %>
